@@ -202,4 +202,4 @@ class Rectangle(Base):
             - y
         '''
         return {"id": self.id, "width": self.width, "height": self.height,
-                "x": self.x, "y": sel
+                "x": self.x, "y": self.y}
