@@ -4,9 +4,14 @@
 import sys
 import MySQLdb
 
-if __name == "__main__":
-    db = MySQLdb.connect(host="localhost", port=3306,
-                         user=sys.argv[1], passwd=sys.argv[2], db=sys.argv[3])
+if __name__ == "__main__":
+    mysql_username = sys.argv[1]
+    mysql_password = sys.argv[2]
+    db_name = sys.argv[3]
+
+    try:
+        db = MySQLdb.connect(host="localhost", port=3306, user=mysql_username,
+                             passwd=mysql_password)
     except MySQLdb.Error as e:
         print("Error connecting to database: {}".format(e))
         sys.exit(1)
