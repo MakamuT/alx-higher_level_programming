@@ -7,6 +7,9 @@ import MySQLdb
 if __name == "__main__":
     db = MySQLdb.connect(host="localhost", port=3306,
                          user=sys.argv[1], passwd=sys.argv[2], db=sys.argv[3])
+    except MySQLdb.Error as e:
+        print("Error connecting to database: {}".format(e))
+        sys.exit(1)
 
     c = db.cursor()
     c.execute("""SELECT * FROM states  WHERE name
