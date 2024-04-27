@@ -1,20 +1,19 @@
 #!/usr/bin/python3
-"""takes in an argument and displays all
-   values in the states table of hbtn_0e_0_usa
+"""
+takes in an argument and displays all values in the states table of
+hbtn_0e_0_usa where name matches the argument
 """
 
-import sys
-import MySQLdb
+import MSQLdb as db
+from sys import argv
 
 if __name__ == "__main__":
-    db = MySQLdb.connect(host="localhost", port=3306,
-                         user=sys.argv[1], passwd=sys.argv[2],
-                         db=sys.argv[3])
-    c = db.cursor()
-    c.exexcute("""SELECT * FROM states WHERE name LIKE BINARY
-               '{}' ORDER BY states.id ASC""".format(sys.argv[4]))
-    rows = c.fecthall()
-    for row in rows:
+    """access to db and get states"""
+    db_connect = db.connect(host="localhost", port=3306, user=argv[1],
+                            passwd=argv[2], db=argv[3])
+    db_cursor = db_connect.cursor()
+    db_cursor.execute("SELECT * FROM states WHERE name LIKE BINARY '{}'
+                      ORDER BY states.id ASC".format(argv[4]))
+    rows_selected = db_cursor.fetchall()
+    for row in rows_selected:
         print(row)
-    c.close()
-    db.close()
