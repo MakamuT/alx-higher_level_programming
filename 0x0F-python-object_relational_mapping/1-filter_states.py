@@ -10,17 +10,17 @@ if __name__ == "__main__":
     db_name = sys.argv[3]
 
     try:
-        con = MySQLdb.connect(host="localhost", port=3306, user=mysql_username,
+        db = MySQLdb.connect(host="localhost", port=3306, user=mysql_username,
                              passwd=mysql_password)
     except MySQLdb.Error as e:
         print("Error connecting to database: {}".format(e))
         sys.exit(1)
 
-    c = con.cursor()
+    c = db.cursor()
     c.execute("""SELECT * FROM states  WHERE name
               LIKE BINARY 'N%' ORDER BY states.id ASC""")
     rows = c.fetchall()
     for row in rows:
         print(row)
-        c.close()
-        con.close()
+        c.close
+        db.close()
