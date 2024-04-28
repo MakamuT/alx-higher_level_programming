@@ -5,22 +5,29 @@ import sys
 import MySQLdb
 
 if __name__ == "__main__":
-    mysql_username = sys.argv[1]
-    mysql_password = sys.argv[2]
-    db_name = sys.argv[3]
+    if len(sys.argv) < 4:
+        print("Usage: {} <mysql_username> <mysql_password> <db_name>"
+              .format(sys.argv[0]))
+        sys.exit(1)
+
+        mysql_username = sys.argv[1]
+        mysql_password = sys.argv[2]
+        db_name = sys.argv[3]
 
     try:
         db = MySQLdb.connect(host="localhost", port=3306, user=mysql_username,
                              passwd=mysql_password)
+        cursor = db.cursor()
+        cursor.execute("""SELECT * FROM states  WHERE name
+                       LIKE BINARY 'N%' ORDER BY states.id ASC""")
+        rows = cursor.fetchall()
+        for row in rows:
+            print(row)
     except MySQLdb.Error as e:
-        print("Error connecting to database: {}".format(e))
-        sys.exit(1)
+        print("Error connecting to database: {}", e)
 
-    c = db.cursor()
-    c.execute("""SELECT * FROM states  WHERE name
-              LIKE BINARY 'N%' ORDER BY states.id ASC""")
-    rows = c.fetchall()
-    for row in rows:
-        print(row)
-        c.close
+    finally:
+        if 'cursor' in locals():
+            cursor.close()
+        if 'db' in locals():
         db.close()
