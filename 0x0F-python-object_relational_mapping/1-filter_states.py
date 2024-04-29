@@ -5,6 +5,7 @@ import sys
 import MySQLdb
 
 if __name__ == "__main__":
+    """access database"""
     if len(sys.argv) < 4:
         print("Usage: {} <mysql_username> <mysql_password> <db_name>"
               .format(sys.argv[0]))
@@ -30,4 +31,4 @@ if __name__ == "__main__":
         if 'cursor' in locals():
             cursor.close()
         if 'db' in locals():
-        db.close()
+            db.close()
