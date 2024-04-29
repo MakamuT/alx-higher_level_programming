@@ -1,7 +1,7 @@
-#!/usr/bin/pyhton3
+#!/usr/bin/python3
 """Lists all State objects from the database"""
 
-from sqlalchemy inmport create_engine
+from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from model_state import State, Base
 from sys import argv
@@ -13,7 +13,7 @@ if __name__ == "__main__":
                                                               argv[2],
                                                               argv[3])
     engine = create_engine(db_url)
-    Session = sessionmaer(bind=engine)
+    Session = sessionmaker(bind=engine)
 
     session = Session()
 
