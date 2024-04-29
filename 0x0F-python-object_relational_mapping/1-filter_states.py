@@ -32,3 +32,5 @@ if __name__ == "__main__":
             cursor.close()
         if 'db' in locals():
             db.close()
+
+list_states_starting_with_N(mysql_username, mysql_password, db_name)
