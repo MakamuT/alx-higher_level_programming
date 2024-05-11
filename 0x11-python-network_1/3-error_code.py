@@ -1,15 +1,22 @@
-#!/usr/bin/bash
-""" fetches https://alx-intranet.hbtn.io/status"""
+#!/usr/bin/python3
+"""fetches https://alx-intranet.hbtn.io/status"""
 
 
 if __name__ == '__main__':
     import urllib.request
     import sys
+    import urllib.error
 
-    argv = sys.argv
-    url = argv[1]
+    if len(sys.argv) != 2:
+        print("Usage: ./script.py <url>")
+        sys.exit(1)
+
+    url = sys.argv[1]
+
     try:
-        with request.urlopen(url) as response:
+        with urllib.request.urlopen(url) as response:
             print(response.read().decode('utf-8'))
-    except error.HTTPError as err:
-        print("Error code: {}".format(err.status))
+    except urllib.error.HTTPError as err:
+        print(f"HTTP Error: {err.code} {err.reason}")
+    except urllib.error.URLError as err:
+        print(f"URL Error: {err.reason}")
