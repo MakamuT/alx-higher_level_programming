@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """fetches https://alx-intranet.hbtn.io/status"""
-requests = __import__('requests')
+import sys
+sys.modules['requests'] = __import__('requests')
 
 
 if __name__ == '__main__':
