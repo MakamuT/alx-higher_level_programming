@@ -1,4 +1,4 @@
-#!/bin/usr/node
+#!/usr/bin/node
 
 const request = require('request');
 let num = 0;
